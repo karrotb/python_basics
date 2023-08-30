@@ -1,0 +1,2 @@
+Newcases = int(input("Number of new cases: ")
+Population = int(input("Population: ")
