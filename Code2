@@ -1,0 +1,9 @@
+Temp_raw = (input("Patient's Temperature(Fº): "))
+#to avoid error message after "if ValueError:", used 'try-except'
+try:
+    Temp = float(Temp_raw)
+    if (Temp>=99.5):
+        print ("The patient has a high temperature.")
+    else:  print ("The patient's temperature is normal.")
+except ValueError:
+    print ("Error: Please enter a valid temperature in degrees Fahrenheit (numerical value only).")
