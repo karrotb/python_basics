@@ -1,0 +1,42 @@
+print("This is a Fahrenheit/Celsius Converter")
+print("Enter the desired conversion direction")
+print("please note that:")
+print("C => Celsius to Fahrenheit")
+print("F => Fahrenheit to Celsius")
+count = 0
+while (count == 0):
+    initial= str(input("Enter the desired conversion direction: "))
+    try: 
+        initial == ("C" or "c" or "F" or "f")
+        if initial == ("C") :
+            celsius= float(input("Enter degrees Celsius: "))
+            def celsius_to_fahrenheit(celsius):
+                ºF=(((celsius) * 9/5) + 32)
+                return ºF
+            ºF_final=celsius_to_fahrenheit(celsius)
+            print((str(round(ºF_final, 2)))+("ºF"))
+        elif initial == ("c") :
+            celsius= float(input("Enter degrees Celsius: "))
+            def celsius_to_fahrenheit(celsius):
+                ºF=(((celsius) * 9/5) + 32)
+                return ºF
+            ºF_final=celsius_to_fahrenheit(celsius)
+            print((str(round(ºF_final, 2)))+("ºF"))
+
+        elif initial == ("F") :
+            fahrenheit= float(input("Enter degrees Fahrenheit: "))
+            def fahrenheit_to_celsius(fahrenheit):
+                ºC=(((fahrenheit) - 32)*5/9)
+                return ºC
+            ºC_final=fahrenheit_to_celsius(fahrenheit)
+            print((str(round(ºC_final, 2)))+("ºC"))
+        elif initial == ("f") :
+            fahrenheit= float(input("Enter degrees Fahrenheit: "))
+            def fahrenheit_to_celsius(fahrenheit):
+                ºC=(((fahrenheit) - 32)*5/9)
+                return ºC
+            ºC_final=fahrenheit_to_celsius(fahrenheit)
+            print((str(round(ºC_final, 2)))+("ºC"))
+        else: print ("Error: Please enter a valid conversion(C or F).")
+    except ValueError:
+        print ("Error: Please enter a valid conversion(C or F) and a valid Temperature(numerical only).")
