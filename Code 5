@@ -1,0 +1,33 @@
+#FINAllY IT WORKS!!!
+print("This is a Systematic Sampler")
+print("please note that all input values must be real numbers")
+
+population_size = int(input("Enter the population size : "))
+def calculate_sample_size():
+    confidence_level = float(input("Enter the confidence level (e.g., 95 or 99) : "))
+    margin_of_error = float(input("Enter the desired margin of error (e.g., 0.05 for 5%) : "))
+    global sample_size
+    if confidence_level == 95:
+        sample_size = (((1.96**2) * 0.5 * (1-(0.5))) / ((margin_of_error)**2))
+    elif confidence_level == 99:
+        sample_size = (((2.58**2) * 0.5 * (1-(0.5))) / ((margin_of_error)**2))
+    else: print("Please enter a valid confidence level (95 or 99)")
+    print(("The maximum sample size for systematic sampling is approximately: ")+str(round(sample_size, 0)))
+calculate_sample_size()
+global system
+system = int(input("Enter the sample size you want to draw from the population : "))
+if system <= sample_size:
+    print("The requested sample size is feasible")
+    def systematic_sampling(population_size, system):
+        count = 0
+        samplist= []
+        while count<=(population_size-((population_size/system)-2)):
+            count=count+(population_size/system)
+            samplist.append(round(count, 0))
+        return samplist
+    systematic_sample = systematic_sampling(population_size, system)
+    print(("The systematic sampling selected the following elements: ")+ str(systematic_sample))
+else: 
+    print("The requested sample size is not feasible")
+        
+
