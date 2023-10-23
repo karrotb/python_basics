@@ -1,0 +1,81 @@
+data_points = [
+
+    (2000, 72.5),
+
+    (2001, 73.1),
+
+    (2002, 73.8),
+
+    (2003, 74.2),
+
+    (2004, 74.7),
+
+    (2005, 75.3),
+
+    (2006, 75.9),
+
+    (2007, 76.5),
+
+    (2008, 76.9),
+
+    (2009, 77.4),
+
+    (2010, 78.0),
+
+    (2011, 78.5),
+
+    (2012, 79.0),
+
+    (2013, 79.5),
+
+    (2014, 80.0),
+
+    (2015, 80.5),
+
+    (2016, 81.0),
+
+    (2017, 81.5),
+
+    (2018, 82.0),
+
+    (2019, 82.5)
+
+]
+#List comprehension to split data into x and y
+iv = [x for x,y in data_points]
+dv = [y for x,y in data_points]
+#Mean calculating function set up for either iv or dv
+def calculate_mean(data):
+    mean= float(sum(data)/len(data))
+    return mean
+#Slope and intercept calculator
+def calculate_regression_coefficients(data_points):
+    #while loop to generate list of values for numerator and denominator of simple linear regression fomula
+    count=0
+    while count < len(iv):
+        ivx= float(iv[count])
+        dvx= float(dv[count])
+        num =[]
+        number = num.append((ivx - calculate_mean(iv)) * (dvx - calculate_mean(dv)))
+        den= []
+        number2 = den.append((ivx - calculate_mean(iv)) * (ivx - calculate_mean(iv)))
+        count = count + 1
+    #2 variables generated, so made them global for use in prediction
+    global m
+    m = float(sum(num)/sum(den))
+    global b
+    b = calculate_mean(dv) - (m * calculate_mean(iv))
+#Only after executing the function does the code recognize 'm' and 'b'
+calculate_regression_coefficients(data_points)
+#Displaying the regression coefficients
+print("Regression Coefficients:")
+print("Slope (m): " + str(round(m, 2)))
+print("Intercept (b): " + str(round(b, 2)))
+#Predictive function follows y= mx+b, x being the input year of observation and y being expected life expectancy
+def make_predictions():
+    print("*Please enter only real number values*")
+    newx= float(input("Enter a new year (x) for prediction: "))
+    prediction= (m*newx)+b
+    return prediction
+#Displaying the predicted life expectancy
+print ("Predicted life expectancy: "+str(round(make_predictions(), 2)))
