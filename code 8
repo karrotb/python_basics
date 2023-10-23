@@ -1,0 +1,8 @@
+data_list = [('apple', 5), ('banana', 2), ('orange', 8), ('grapes', 3), ('pineapple', 1)]
+data_dict = {}
+for fruit in data_list:
+    fruit, amount = fruit
+    data_dict[fruit] = amount
+print("Original List of Tuples: "+str(data_list))
+print("Converted Dictionary: " + str(data_dict))
+
