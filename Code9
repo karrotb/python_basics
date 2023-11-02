@@ -1,0 +1,46 @@
+person = Patient("John Doe", 45, "Male", (140, 85), 36.8)
+person2 = Patient("Jane Smith", 32, "Female", (130, 88), 37.6)
+class Patient:
+    def __init__(self, name, age, gender, blood_pressure, temperature):
+        self.name = name
+        self.age = age
+        self.gender = gender
+        self.blood_pressure = blood_pressure
+        self.temperature = temperature
+    def get_name(self):
+        return self.name
+    def get_age(self):
+        return self.age
+    def get_gender(self):
+        return self.gender
+    def get_blood_pressure(self):
+        return self.blood_pressure
+    def get_temperature(self):
+        return self.temperature
+    def display_patient_info(self):
+        print("Name: " + str(Patient.get_name(self)))
+        print("Age: " + str(Patient.get_age(self)))
+        print("Gender: " + str(Patient.get_gender(self)))
+        print("Blood pressure: " + str(Patient.get_blood_pressure(self)))
+        print("Temperature: " + str(Patient.get_temperature(self)))
+    def is_hypertensive(self):
+        sys = Patient.get_blood_pressure(self)[0]
+        dia = Patient.get_blood_pressure(self)[1]
+        if float(sys)>=140 or float(dia)>=90:
+            print("Patient is Hypertensive: True")
+        else: print("Patient is Hypertensive: False")
+    def is_feverish(self):
+        if Patient.get_temperature(self)>=37.5:
+            print("Patient is Feverish: True")
+        else: print("Patient is Feverish: False")
+
+print("Patient 1 Information: ")
+Patient.display_patient_info(person)
+Patient.is_hypertensive(person)
+Patient.is_feverish(person)
+print(" ")
+print("Patient 2 Information: ")
+Patient.display_patient_info(person2)
+Patient.is_hypertensive(person2)
+Patient.is_feverish(person2)
+
