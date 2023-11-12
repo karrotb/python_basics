@@ -1,0 +1,59 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import sklearn as sk
+import numpy as np
+
+data = {
+
+    'Age': [25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
+
+    'BloodPressure': [120, 122, 126, 128, 130, 133, 135, 138, 142, 145, 150, 155, 160, 165, 170, 175]
+
+}
+
+df = pd.DataFrame(data)
+df.isnull()
+df.notnull()
+df.describe()
+
+plt.figure(figsize=(10, 10))
+plt.scatter(df["Age"], df["BloodPressure"])
+plt.xlabel("Age (years)")
+plt.ylabel("Blood Pressure (mmHg)")
+plt.title("Blood Pressure based on Age")
+plt.grid(True)
+
+#Train/Test for linear regression
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test= train_test_split(df["Age"],df["BloodPressure"], test_size=1, random_state=100)
+X_train = np.array(X_train).reshape(-1,1)
+X_test= np.array(X_train).reshape(-1,1)
+
+
+#Linear Regression
+
+from sklearn.linear_model import LinearRegression
+
+
+line = LinearRegression()
+line.fit(X_train, y_train)
+b = line.intercept_
+m = line.coef_
+Y = line.predict(X_train)
+
+plt.plot(X_test, Y, color = 'red')
+
+def predict(x):
+    prediction = round(float((m * x) + b), 2)
+    return prediction
+
+# The coefficients
+print("Coefficients: \n", m , b )
+plt.show()
+
+print("Predicted Blood Pressure at Age __ \n", "30: ", predict(30))
+print("40: ", predict(40))
+print("50: ", predict(50))
+print("70: ", predict(70))
+print("90: ", predict(90))     
+
