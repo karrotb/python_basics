@@ -1,0 +1,33 @@
+import pandas as pd
+
+file_path = "Week13Assignment.txt"
+try:
+    with open(file_path, "r") as file:
+        content = file.read()
+except FileNotFoundError:
+    print(f"File '{file_path}' not found.")
+except IOError:
+    print("An error occurred while reading the file.")
+
+df=pd.read_csv(file_path, sep= ',')
+print(df)
+
+avg_age= df[' Age'].mean()
+
+males= (df[' Gender'] == ' Male').sum()
+females= (df[' Gender'] == ' Female').sum()
+
+maxbp= max(df[' BloodPressure'])
+minbp= min(df[' BloodPressure'])
+
+avg_temp= df[' Temperature'].mean()
+
+print()
+print("-*-Patient Statistics-*-")
+print(f"Average Age: "+str(avg_age))
+#can use {} to avoid concatenation error
+print(f"Male Patients: {males}")
+print(f"Female Patients: {females}")
+print(f"Highest Blood Pressure: {maxbp}")
+print(f"Lowest Blood Pressure: {minbp}")
+print(f"Average Body Temperature (Cº): "+str(avg_temp))
