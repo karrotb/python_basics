@@ -1,0 +1,76 @@
+import pandas as pd
+
+file_path = "Week14Assignment.txt"
+try:
+    with open(file_path, "r") as file:
+        content = file.read()
+except FileNotFoundError:
+    print(f"File '{file_path}' not found.")
+except IOError:
+    print("An error occurred while reading the file.")
+
+df=pd.read_csv(file_path, sep= ',')
+df.isnull()
+df.notnull()
+df.describe()
+df.head()
+print(df)
+
+readmission= (df[' Readmission'] == 1).sum()
+noreadmission= (df[' Readmission'] == 0).sum()
+print(f"Number of Patients Readmitted: {readmission}")
+
+avg_staff= round(df[' StaffSatisfaction'].mean(), 2)
+print(f"Average Staff Satisfaction: {avg_staff}")
+
+avg_clean= round(df[' CleanlinessSatisfaction'].mean(), 2)
+print(f"Average Cleanliness Satisfaction: {avg_clean}")
+
+avg_food= round(df[' FoodSatisfaction'].mean(), 2)
+print(f"Average Food Satisfaction: {avg_food}")
+
+avg_comfort= round(df[' ComfortSatisfaction'].mean(), 2)
+print(f"Average Comfort Satisfaction: {avg_comfort}")
+
+avg_comm= round(df[' CommunicationSatisfaction'].mean(), 2)
+print(f"Average Communication Satisfaction: {avg_comm}")
+
+import matplotlib.pyplot as plt
+import sklearn as sk
+import numpy as np
+
+#Calculate overall satisfaction in new column for each patient (row)
+df['Overall Satisfaction'] = df.iloc[:,1:6].mean(axis=1)
+
+#Matplot for scatter plot
+plt.figure(figsize=(4, 8))
+plt.scatter(df[" Readmission"],df["Overall Satisfaction"])
+plt.xlabel("Readmission Rate(0 or 1)")
+plt.ylabel("Overall Satisfaction (out of 5)")
+plt.title("Correlation between Overall Satisfaction scores and Readmission rates")
+plt.grid(True)
+
+#Train/Test for linear regression
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test= train_test_split(df[" Readmission"],df["Overall Satisfaction"], test_size=1, random_state=100)
+X_train = np.array(X_train).reshape(-1,1)
+X_test= np.array(X_train).reshape(-1,1)
+
+#Linear Regression
+from sklearn.linear_model import LinearRegression
+
+line = LinearRegression()
+line.fit(X_train, y_train)
+b = line.intercept_
+m = line.coef_
+Y = line.predict(X_train)
+
+plt.plot(X_test, Y, color = 'red')
+plt.show()
+
+# The coefficients
+print("Coefficients: \n", m , b )
+
+#Final result
+print("Correlation between Overall Satisfaction Scores and Readmission: Weak correlation")
+
