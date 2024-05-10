@@ -1,2 +1,2 @@
-# python_basics
-intro to Python -> Health Analytics
+# python_projects
+Python -> Health Analytics
